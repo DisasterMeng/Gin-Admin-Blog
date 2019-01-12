@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Gin-Admin-Blog/models"
 	"Gin-Admin-Blog/pkg/setting"
 	"Gin-Admin-Blog/routers"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 func main() {
 
 	setting.SetUp()
+	models.SetUp()
 
 	routersInit := routers.InitRouter()
 

@@ -6,6 +6,13 @@ import (
 	"time"
 )
 
+type App struct {
+	JwtSecret string
+	PageSize  int
+}
+
+var AppSetting = &App{}
+
 type Server struct {
 	RunMode      string
 	HttpPort     int
@@ -25,6 +32,13 @@ type Redis struct {
 
 var RedisSetting = &Redis{}
 
+type Database struct {
+	Type string
+	Path string
+}
+
+var DatabaseSetting = &Database{}
+
 var cfg *ini.File
 
 func SetUp() {
@@ -34,8 +48,10 @@ func SetUp() {
 		log.Fatalf("Fail to parse 'conf/app.ini' :%v", err)
 	}
 
+	mapTo("app", AppSetting)
 	mapTo("server", ServerSetting)
 	mapTo("redis", RedisSetting)
+	mapTo("database", DatabaseSetting)
 
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
 	ServerSetting.WriteTimeout = ServerSetting.ReadTimeout * time.Second
