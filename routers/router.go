@@ -53,6 +53,8 @@ func InitRouter() *gin.Engine {
 		vOne.POST("tag/delete", v1.DeleteTag)
 		vOne.POST("tag/add", v1.AddTag)
 
+		r.POST("md2html", v1.MdToHtml)
+
 	}
 	return r
 }
