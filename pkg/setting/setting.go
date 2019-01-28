@@ -9,6 +9,16 @@ import (
 type App struct {
 	JwtSecret string
 	PageSize  int
+
+	UploadSummaryDir string
+	UploadFriendDir  string
+	UploadUserDir    string
+	UploadDir        string
+
+	ImageMaxSize   int
+	ImageAllowExts []string
+
+	PrefixUrl string
 }
 
 var AppSetting = &App{}
@@ -39,6 +49,15 @@ type Database struct {
 
 var DatabaseSetting = &Database{}
 
+type QiNiu struct {
+	QinNiuAccessKey  string
+	QinNiuSecretKey  string
+	QinNiuBucketName string
+	QinBucketDomain  string
+}
+
+var QinNiuSetting = &QiNiu{}
+
 var cfg *ini.File
 
 func SetUp() {
@@ -52,6 +71,7 @@ func SetUp() {
 	mapTo("server", ServerSetting)
 	mapTo("redis", RedisSetting)
 	mapTo("database", DatabaseSetting)
+	mapTo("qiniu", QinNiuSetting)
 
 	ServerSetting.ReadTimeout = ServerSetting.ReadTimeout * time.Second
 	ServerSetting.WriteTimeout = ServerSetting.ReadTimeout * time.Second

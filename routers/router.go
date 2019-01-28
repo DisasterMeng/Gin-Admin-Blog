@@ -7,6 +7,7 @@ import (
 	"Gin-Admin-Blog/routers/api/v1"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"time"
 )
 
@@ -29,18 +30,29 @@ func InitRouter() *gin.Engine {
 	gin.SetMode(setting.ServerSetting.RunMode)
 
 	//r.GET("/doc/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.StaticFS(setting.AppSetting.UploadDir, http.Dir(setting.AppSetting.UploadDir))
 	r.POST("auth", api.GetAuth)
+	r.POST("upload-summary", v1.UploadSummary)
 
 	vOne := r.Group("api/v1")
 	vOne.Use(jwt.JWT())
 	{
 
 		vOne.GET("user/info", v1.GetUser)
-		vOne.GET("blogs", v1.GetBlogs)
 
-		vOne.GET("categorys", v1.GetCategorys)
+		vOne.GET("blog/list", v1.GetBlogs)
+		vOne.POST("blog/add", v1.AddBlog)
+		vOne.POST("blog/delete", v1.DeleteBlog)
 
-		vOne.GET("tags", v1.GetTags)
+		vOne.GET("category/list", v1.GetCategorys)
+		vOne.POST("category/delete", v1.DeleteCategory)
+		vOne.POST("category/add", v1.AddCategory)
+		vOne.POST("category/update", v1.UpdateCategory)
+
+		vOne.GET("tag/list", v1.GetTags)
+		vOne.POST("tag/delete", v1.DeleteTag)
+		vOne.POST("tag/add", v1.AddTag)
+
 	}
 	return r
 }
