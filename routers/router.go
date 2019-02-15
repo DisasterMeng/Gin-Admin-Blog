@@ -52,6 +52,7 @@ func InitRouter() *gin.Engine {
 		vOne.GET("tag/list", v1.GetTags)
 		vOne.POST("tag/delete", v1.DeleteTag)
 		vOne.POST("tag/add", v1.AddTag)
+		vOne.POST("tag/update", v1.UpdateTag)
 
 		r.POST("md2html", v1.MdToHtml)
 

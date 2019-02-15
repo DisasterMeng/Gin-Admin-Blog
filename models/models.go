@@ -19,9 +19,9 @@ func (j JsonTime) MarshalJSON() ([]byte, error) {
 }
 
 type Model struct {
-	Id       int64    `json:"id"`
-	Created  JsonTime `json:"created"`
-	Modified JsonTime `json:"modified"`
+	Id       int64     `json:"id"`
+	Created  time.Time `json:"created"`
+	Modified time.Time `json:"modified"`
 }
 
 var db *gorm.DB

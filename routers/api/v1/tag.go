@@ -81,3 +81,31 @@ func AddTag(c *gin.Context) {
 	appG.Response(http.StatusOK, e.SUCCESS, nil)
 
 }
+
+//-------------------------------
+type UpdateTagForm struct {
+	Id   int64  `form:"id"`
+	Name string `form:"name"`
+}
+
+func UpdateTag(c *gin.Context) {
+
+	appG := app.Gin{C: c}
+	var form UpdateTagForm
+
+	httpCode, errCode := app.BindAndValid(c, &form)
+	if errCode != e.SUCCESS {
+		appG.Response(httpCode, errCode, nil)
+		return
+	}
+
+	tagService := tag_service.Tag{Id: form.Id, Name: form.Name}
+
+	if err := tagService.Update(); err != nil {
+		appG.Response(http.StatusInternalServerError, e.ERROR_UPDATE_TAG_FAIL, nil)
+		return
+	}
+
+	appG.Response(http.StatusOK, e.SUCCESS, nil)
+
+}

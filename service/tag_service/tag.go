@@ -37,3 +37,14 @@ func (t *Tag) Add() error {
 	}
 	return nil
 }
+
+func (t *Tag) Update() error {
+	tag := map[string]interface{}{
+		"name": t.Name,
+		"id":   t.Id,
+	}
+	if err := models.UpdateTag(tag); err != nil {
+		return err
+	}
+	return nil
+}

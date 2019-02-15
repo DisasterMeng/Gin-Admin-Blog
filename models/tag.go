@@ -59,3 +59,15 @@ func AddTag(data map[string]interface{}) error {
 	}
 	return nil
 }
+
+func UpdateTag(data map[string]interface{}) error {
+	model := Model{Id: data["id"].(int64)}
+	tag := Tag{
+		Model: model,
+	}
+	name := data["name"].(string)
+	if err := db.Model(&tag).Update("name", name).Error; err != nil {
+		return err
+	}
+	return nil
+}
