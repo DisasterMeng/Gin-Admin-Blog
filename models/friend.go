@@ -66,7 +66,10 @@ func DeleteFriend(id int64) error {
 
 func AddFriend(data map[string]interface{}) error {
 	friend := Friend{
-		Name: data["name"].(string),
+		Name:  data["name"].(string),
+		Desc:  data["desc"].(string),
+		Image: data["image"].(string),
+		Link:  data["link"].(string),
 	}
 	if err := db.Create(&friend).Error; err != nil {
 		return err
