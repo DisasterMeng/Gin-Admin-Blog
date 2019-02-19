@@ -17,6 +17,10 @@ var MsgFlags = map[int]string{
 	ERROR_ADD_TAG_FAIL:       "添加标签失败",
 	ERROR_UPDATE_TAG_FAIL:    "更新标签失败",
 
+	ERROR_NOT_EXIST_FRIEND:   "友链不存在",
+	ERROR_ADD_FRIEND_FAIL:    "添加友链失败",
+	ERROR_DELETE_FRIEND_FAIL: "删除友链失败",
+
 	ERROR_ADD_BLOG_FAIL:    "添加Blog失败",
 	ERROR_DELETE_BLOG_FAIL: "删除Blog失败",
 

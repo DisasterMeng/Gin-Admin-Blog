@@ -54,6 +54,10 @@ func InitRouter() *gin.Engine {
 		vOne.POST("tag/add", v1.AddTag)
 		vOne.POST("tag/update", v1.UpdateTag)
 
+		vOne.GET("friend/list", v1.GetFriends)
+		vOne.POST("friend/delete", v1.DeleteFriend)
+		vOne.POST("friend/add", v1.AddFriend)
+
 		r.POST("md2html", v1.MdToHtml)
 
 	}
